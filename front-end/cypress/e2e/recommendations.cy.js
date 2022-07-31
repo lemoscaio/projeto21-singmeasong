@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import { faker } from "@faker-js/faker"
-
 beforeEach(() => {
   cy.clearDatabase()
 })
@@ -74,77 +72,77 @@ describe("Recommendations test suite", () => {
 })
 
 describe("Home screen test suite", () => {
-  // it("should load ten song recommendations", () => {
-  //   const amount = 50
-  //   const highScorePercentage = 70
-  //   cy.seedDatabase(amount, highScorePercentage)
+  it("should load ten song recommendations", () => {
+    const amount = 50
+    const highScorePercentage = 70
+    cy.seedDatabase(amount, highScorePercentage)
 
-  //   cy.intercept("GET", "/recommendations").as("getRecommendations")
-  //   cy.visit("http://localhost:3000")
-  //   cy.wait("@getRecommendations").then(({ response }) => {
-  //     cy.log(response)
-  //     expect(response.body.length).to.equal(10)
-  //     expect(response.body[0]).to.haveOwnProperty("name")
-  //     expect(response.body[0]).to.haveOwnProperty("youtubeLink")
-  //     expect(response.body[0]).to.haveOwnProperty("score")
-  //   })
-  // })
+    cy.intercept("GET", "/recommendations").as("getRecommendations")
+    cy.visit("http://localhost:3000")
+    cy.wait("@getRecommendations").then(({ response }) => {
+      cy.log(response)
+      expect(response.body.length).to.equal(10)
+      expect(response.body[0]).to.haveOwnProperty("name")
+      expect(response.body[0]).to.haveOwnProperty("youtubeLink")
+      expect(response.body[0]).to.haveOwnProperty("score")
+    })
+  })
 
-  // it("should be able to vote up", () => {
-  //   const song = {
-  //     name: "Test song name",
-  //     youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  //   }
+  it("should be able to vote up", () => {
+    const song = {
+      name: "Test song name",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    }
 
-  //   cy.addSong(song)
+    cy.addSong(song)
 
-  //   cy.intercept("GET", "/recommendations").as("getRecommendations")
-  //   cy.visit("http://localhost:3000")
-  //   cy.wait("@getRecommendations")
+    cy.intercept("GET", "/recommendations").as("getRecommendations")
+    cy.visit("http://localhost:3000")
+    cy.wait("@getRecommendations")
 
-  //   cy.intercept("POST", `/recommendations/1/upvote`).as("buttonClick")
-  //   cy.get("article>div:nth-child(3)").then((div) => {
-  //     const voteCountBefore = Number(div.text())
-  //     cy.log(voteCountBefore)
+    cy.intercept("POST", `/recommendations/1/upvote`).as("buttonClick")
+    cy.get("article>div:nth-child(3)").then((div) => {
+      const voteCountBefore = Number(div.text())
+      cy.log(voteCountBefore)
 
-  //     cy.get(".vote-up-arrow:first").click()
-  //     cy.wait("@buttonClick").then(({ response }) => {
-  //       expect(response.statusCode).to.equal(200)
-  //       const voteCountAfter = Number(div.text())
-  //       cy.wait(500).then(() =>
-  //         expect(voteCountAfter).to.equal(voteCountBefore + 1),
-  //       )
-  //     })
-  //   })
-  // })
+      cy.get(".vote-up-arrow:first").click()
+      cy.wait("@buttonClick").then(({ response }) => {
+        expect(response.statusCode).to.equal(200)
+        const voteCountAfter = Number(div.text())
+        cy.wait(500).then(() =>
+          expect(voteCountAfter).to.equal(voteCountBefore + 1),
+        )
+      })
+    })
+  })
 
-  // it("should be able to vote down", () => {
-  //   const song = {
-  //     name: "Test song name",
-  //     youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-  //   }
+  it("should be able to vote down", () => {
+    const song = {
+      name: "Test song name",
+      youtubeLink: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    }
 
-  //   cy.addSong(song)
+    cy.addSong(song)
 
-  //   cy.intercept("GET", "/recommendations").as("getRecommendations")
-  //   cy.visit("http://localhost:3000")
-  //   cy.wait("@getRecommendations")
+    cy.intercept("GET", "/recommendations").as("getRecommendations")
+    cy.visit("http://localhost:3000")
+    cy.wait("@getRecommendations")
 
-  //   cy.intercept("POST", `/recommendations/1/downvote`).as("buttonClick")
-  //   cy.get("article>div:nth-child(3)").then((div) => {
-  //     const voteCountBefore = Number(div.text())
-  //     cy.log(voteCountBefore)
+    cy.intercept("POST", `/recommendations/1/downvote`).as("buttonClick")
+    cy.get("article>div:nth-child(3)").then((div) => {
+      const voteCountBefore = Number(div.text())
+      cy.log(voteCountBefore)
 
-  //     cy.get(".vote-down-arrow:first").click()
-  //     cy.wait("@buttonClick").then(({ response }) => {
-  //       expect(response.statusCode).to.equal(200)
-  //       const voteCountAfter = Number(div.text())
-  //       cy.wait(500).then(() =>
-  //         expect(voteCountAfter).to.equal(voteCountBefore - 1),
-  //       )
-  //     })
-  //   })
-  // })
+      cy.get(".vote-down-arrow:first").click()
+      cy.wait("@buttonClick").then(({ response }) => {
+        expect(response.statusCode).to.equal(200)
+        const voteCountAfter = Number(div.text())
+        cy.wait(500).then(() =>
+          expect(voteCountAfter).to.equal(voteCountBefore - 1),
+        )
+      })
+    })
+  })
 
   it("should remove the video when down voting a video with -5 score", () => {
     const score = -5
