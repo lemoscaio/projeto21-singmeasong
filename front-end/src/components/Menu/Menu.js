@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import styled from "styled-components"
+import { useNavigate } from "react-router-dom"
 
-import { FaHome } from "react-icons/fa";
-import { HiTrendingUp } from "react-icons/hi";
-import { FiShuffle } from "react-icons/fi";
+import { FaHome } from "react-icons/fa"
+import { HiTrendingUp } from "react-icons/hi"
+import { FiShuffle } from "react-icons/fi"
 
 export default function Menu() {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   return (
     <StyledMenu>
@@ -35,7 +35,7 @@ const StyledMenu = styled.div`
   justify-content: space-between;
   margin: 15px auto;
   padding: 10px 14px;
-`;
+`
 
 const MenuItem = styled.div`
   display: flex;
@@ -45,4 +45,4 @@ const MenuItem = styled.div`
   font-size: 14px;
   font-weight: 300;
   cursor: pointer;
-`;
+`
