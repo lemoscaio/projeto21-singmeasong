@@ -96,6 +96,12 @@ describe("Recommendations -> Vote test suite", () => {
 
       expect(result.statusCode).toBe(404)
     })
+
+    it("Given a string instead of a valid id, it should trigger a generic error", async () => {
+      const result = await agent.post("/recommendations/error/upvote")
+
+      expect(result.statusCode).toBe(500)
+    })
   })
 
   describe("/recommendations/:id/votedown", () => {
